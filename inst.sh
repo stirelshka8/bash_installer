@@ -23,13 +23,13 @@ else
 		cd /tmp
 		mkdir solstmp
 		chmod -R 777 /tmp/solstmp
-		echo "[+] СОЗДАНА ВРЕМЕННАЯ ДЕРИКТОРИЯ ПРОГРАММЫ"
+		echo "[+] СОЗДАНА ВРЕМЕННАЯ ДИРЕКТОРИЯ ПРОГРАММЫ"
 		#
 		# здесь разместить код для скачивания с GitHub в папку /tmp/solstmp
 		#
 		cd /usr/bin
 		mkdir solsdev
-		echo "[+] СОЗДАНА РАБОЧАЯ ДЕРИКТОРИЯ ПРОГРАММЫ"
+		echo "[+] СОЗДАНА РАБОЧАЯ ДИРЕКТОРИЯ ПРОГРАММЫ"
 		chmod -R 777 ~/solsdev
 		cp -f /tmp/solstmp/Netology.py /usr/bin/solsdev
 		cd ~/solsdev
