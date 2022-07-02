@@ -18,7 +18,7 @@ then
     echo "Запустите скрипт с правами суперпользователя >>> sudo [ПУТЬ К СКРИПТУ]/inst.sh <<<"
 	exit
 else
-	if ! [ -d /usr/bin/solsdev/ ] # Проверяем установлена ли программа
+	if ! [ -d /usr/bin/solsdev/ ]
 	then
 		cd /tmp
 		mkdir solstmp
