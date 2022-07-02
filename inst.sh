@@ -24,15 +24,16 @@ else
 		mkdir solstmp
 		chmod -R 777 /tmp/solstmp
 		echo "[+] СОЗДАНА ВРЕМЕННАЯ ДИРЕКТОРИЯ ПРОГРАММЫ"
+		cd /tmp/solstmp
 		#
-		# здесь разместить код для скачивания с GitHub в папку /tmp/solstmp
-		#
+		wget 'https://github.com/stirelshka8/First_programm/archive/refs/heads/main.zip'
+		# добавить распаковку. Но так что бы нужные файлы распаковывались в solstemp, а не создавать новую папку
 		cd /usr/bin
 		mkdir solsdev
 		echo "[+] СОЗДАНА РАБОЧАЯ ДИРЕКТОРИЯ ПРОГРАММЫ"
-		chmod -R 777 ~/solsdev
-		cp -f /tmp/solstmp/Netology.py /usr/bin/solsdev
-		cd ~/solsdev
+		chmod -R 777 /usr/bin/solsdev
+		#cp -f /tmp/solstmp/Netology.py /usr/bin/solsdev
+		cd /usr/bin/solsdev
 		echo "[+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО"
 		# --------------------------------------------
 		# Здесь прописываем все нужные библиотеки
@@ -44,10 +45,6 @@ else
 		#rm -Rv /tmp/solstmp/
 		#echo "[+] УДАЛЕНИЕ ВРЕМЕННЫХ ФАЙЛОВ ЗАВЕРШЕНО
 		# --------------------------------------------
-		rm -Rv /tmp/solstmp/
-		rm -Rv /usr/bin/solsdev/
-		# --------------------------------------------
-
 	else
 		echo " >>>>>>> Программа уже установлена!!! <<<<<<<"
 		echo -n "         Удалить (да/нет): "
