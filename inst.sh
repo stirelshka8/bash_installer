@@ -18,7 +18,7 @@ then
     echo "Запустите скрипт с правами суперпользователя >>> sudo /tmp/solstmp/inst.sh <<<"
 	exit
 else
-	if ! [ -d /usr/bin/solsdev/ ]
+	if ! [ -d /usr/bin/solsdev/ ] # Проверяем установлена ли программа
 	then
 		cd /tmp
 		mkdir solstmp
@@ -34,13 +34,15 @@ else
 		cp -f /tmp/solstmp/Netology.py /usr/bin/solsdev
 		cd ~/solsdev
 		echo "[+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО"
+		# --------------------------------------------
+		# Здесь прописываем все нужные библиотеки
         #pip3 install colorama
         #pip3 install art
 		#echo "[+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ"
+		# --------------------------------------------
 		#echo "НАЧАЛО УДАЛЕНИЯ ВРЕМЕННЫХ ФАЙЛОВ"
 		#rm -Rv /tmp/solstmp/
 		#echo "[+] УДАЛЕНИЕ ВРЕМЕННЫХ ФАЙЛОВ ЗАВЕРШЕНО
-		
 		# --------------------------------------------
 		rm -Rv /tmp/solstmp/
 		rm -Rv /usr/bin/solsdev/
