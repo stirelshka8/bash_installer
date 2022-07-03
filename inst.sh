@@ -41,6 +41,7 @@ else
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
 		cp -f /tmp/solstmp/*.py /usr/bin/solsdev # копируем все файла с расширением .py
 		cp -f /tmp/solstmp/app.desktop /usr/bin/solsdev
+		cp -f /tmp/solstmp/solsicons.ico /usr/bin/solsdev
 		#cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		cd /usr/bin/solsdev
@@ -62,7 +63,6 @@ else
 
 		if [[ $STARTPAR = да ]]
 		then
-			# TODO: Написать код создания ярлыка, но перед этим написать скрипт запуска
 			echo -e "\033[41m\033[30m [+] ЯРЛЫК СОЗДАН НА РАБОЧЕМ СТОЛЕ \033[0m"
 			ln -s /usr/bin/solsdev/app.desktop /home/stirelshka/Рабочий\ стол/
 		else
