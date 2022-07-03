@@ -41,8 +41,7 @@ else
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
 		cp -f /tmp/solstmp/*.py /usr/bin/solsdev # копируем все файла с расширением .py
 		#cp -f /tmp/solstmp/app.desktop /usr/bin/solsdev
-		#TODO: Сделать копирование иконки в /usr/share/icons/solsdev/solsicons.ico
-		#cp -f /tmp/solstmp/solsicons.ico /usr/bin/solsdev
+		#cp -f /tmp/solstmp/solsicons.ico /usr/share/icons/solsicons.ico
 		#cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		cd /usr/bin/solsdev

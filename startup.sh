@@ -1,1 +1,1 @@
-python3 inst.sh
+python3 Netology.py
