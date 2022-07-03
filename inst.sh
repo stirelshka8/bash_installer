@@ -32,7 +32,7 @@ else
 		echo -e "\033[41m\033[30m [+] СКАЧИВАНИЕ ЗАВЕРШЕНО \033[0m"
 		echo -e "\033[41m\033[30m [*] НАЧАЛО РАСПАКОВКИ АРХИВА \033[0m"
 		#unzip -j main.zip \*.py -d /tmp/solstmp # распаковываем только .py файлы и не обращаем внимание на вложенные папки
-		unzip -j main.zip -d /tmp/solstmp # распаковываем все
+		unzip -j main.zip -d /tmp/solstmp # распаковываем все не обращая внимания на вложенные папки (-j)
 		echo -e "\033[41m\033[30m [+] РАСПАКОВКА АРХИВА ЗАВЕРШЕНА \033[0m"
 		cd /usr/bin
 		mkdir solsdev
@@ -40,6 +40,7 @@ else
 		chmod -R 777 /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
 		cp -f /tmp/solstmp/*.py /usr/bin/solsdev # копируем все файла с расширением .py
+		#cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		cd /usr/bin/solsdev
 		# --------------------------------------------
