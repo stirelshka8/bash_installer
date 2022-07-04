@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Архив должен иметь расширение ZIP!
+
 clear
 echo " ___   __    _  _______  _______  _______  ___      ___     
 |   | |  |  | ||       ||       ||   _   ||   |    |   |    
@@ -11,10 +13,16 @@ echo " ___   __    _  _______  _______  _______  ___      ___
 echo
 echo "************************************************************"
 
-PATHINST=/usr/bin/solsdev # Переменная рабочей директории
-PATHTEMP=/tmp/solstmp # Переменная директории временных файлов
 SETTMP=solstmp # Переменная для создания временной директории
 SETDIR=solsdev # Переменная для создания рабочей директории
+PATHINST=/usr/bin/$SETDIR # Переменная рабочей директории
+PATHTEMP=/tmp/$SETTMP # Переменная директории временных файлов
+PATHICO=/usr/share/icons # Переменная дериктории где лежит иконка программы
+NAMEAPP=app # Переменная названия ярлыка запуска
+NAMEICO=solsicons # Переменная названия иконки программы
+NAMESCR=startup # Переменная названия скрипта запуска программы
+DOWNLINK=https://repo.solsdev.site/mian/main.zip # Переменная ссылки на скачивание программы
+NAMEZIP=main # Переменная названия и расширения скачиваемого архива
 
 if [ "$(whoami)" != 'root' ];
 then
@@ -29,14 +37,12 @@ else
 		chmod -R 777 $PATHTEMP
 		echo -e "\033[41m\033[30m [+] СОЗДАНА ВРЕМЕННАЯ ДИРЕКТОРИЯ ПРОГРАММЫ \033[0m"
 		cd $PATHTEMP
-		echo -e "\033[41m\033[30m [*] НАЧАЛО СКАЧИВАНИЯ ПРОГРАММЫ С GITHUB \033[0m"
-		#*********
-		wget -q 'https://repo.solsdev.site/mian/main.zip'
-		#*********
+		echo -e "\033[41m\033[30m [*] НАЧАЛО СКАЧИВАНИЯ ПРОГРАММЫ \033[0m"
+		wget -q $DOWNLINK 
 		echo -e "\033[41m\033[30m [+] СКАЧИВАНИЕ ЗАВЕРШЕНО \033[0m"
 		echo -e "\033[41m\033[30m [*] НАЧАЛО РАСПАКОВКИ АРХИВА \033[0m"
-		#unzip -j main.zip \*.py -d $PATHTEMP # распаковываем только .py файлы и не обращаем внимание на вложенные папки
-		unzip -j main.zip -d $PATHTEMP # распаковываем все не обращая внимания на вложенные папки (-j)
+		#unzip -j $NAMEZIP.zip \*.py -d $PATHTEMP # распаковываем только .py файлы и не обращаем внимание на вложенные папки
+		unzip -j $NAMEZIP.zip -d $PATHTEMP # распаковываем все не обращая внимания на вложенные папки (-j)
 		echo -e "\033[41m\033[30m [+] РАСПАКОВКА АРХИВА ЗАВЕРШЕНА \033[0m"
 		cd /usr/bin
 		mkdir $SETDIR
@@ -44,9 +50,9 @@ else
 		chmod -R 777 $PATHINST
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
 		cp -f $PATHTEMP/*.py $PATHINST # копируем все файла с расширением .py
-		cp -f $PATHTEMP/app.desktop $PATHINST
-		cp -f $PATHTEMP/solsicons.ico /usr/share/icons/solsicons.ico
-		cp -f $PATHTEMP/startup.sh $PATHINST
+		cp -f $PATHTEMP/$NAMEAPP.desktop $PATHINST
+		cp -f $PATHTEMP/$NAMEICO.ico $PATHICO/$NAMEICO.ico
+		cp -f $PATHTEMP/$NAMESCR.sh $PATHINST
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		cd $PATHINST
 		# --------------------------------------------
@@ -84,7 +90,7 @@ else
 		if [[ $DELPAR = да ]]
 		then
 			rm -Rv $PATHINST
-			rm -v /usr/share/icons/solsicons.ico
+			rm -v $PATHICO/solsicons.ico
 			echo -e "\033[41m\033[30m [+] ПРОГРАММА ПОЛНОСТЬЮ УДАЛЕНА \033[0m"
 		else
 			echo -e "\033[41m\033[30m [!] РАБОТА ПРОГРАММЫ ЗАВЕРШЕНА \033[0m"
