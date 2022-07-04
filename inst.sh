@@ -11,6 +11,10 @@ echo " ___   __    _  _______  _______  _______  ___      ___
 echo
 echo "************************************************************"
 
+PATHINST=/usr/bin/solsdev # Переменная рабочей директории
+PATHTEMP=/tmp/solstmp # Переменная директории временных файлов
+SETTMP=solstmp # Переменная для создания временной директории
+SETDIR=solsdev # Переменная для создания рабочей директории
 
 if [ "$(whoami)" != 'root' ];
 then
@@ -18,33 +22,33 @@ then
     echo "Запустите скрипт с правами суперпользователя >>> sudo [ПУТЬ К СКРИПТУ]/inst.sh <<<"
 	exit
 else
-	if ! [ -d /usr/bin/solsdev/ ]
+	if ! [ -d $PATHINST ]
 	then
 		cd /tmp
-		mkdir solstmp
-		chmod -R 777 /tmp/solstmp
+		mkdir $SETTMP
+		chmod -R 777 $PATHTEMP
 		echo -e "\033[41m\033[30m [+] СОЗДАНА ВРЕМЕННАЯ ДИРЕКТОРИЯ ПРОГРАММЫ \033[0m"
-		cd /tmp/solstmp
+		cd $PATHTEMP
 		echo -e "\033[41m\033[30m [*] НАЧАЛО СКАЧИВАНИЯ ПРОГРАММЫ С GITHUB \033[0m"
 		#*********
 		wget -q 'https://repo.solsdev.site/mian/main.zip'
 		#*********
 		echo -e "\033[41m\033[30m [+] СКАЧИВАНИЕ ЗАВЕРШЕНО \033[0m"
 		echo -e "\033[41m\033[30m [*] НАЧАЛО РАСПАКОВКИ АРХИВА \033[0m"
-		#unzip -j main.zip \*.py -d /tmp/solstmp # распаковываем только .py файлы и не обращаем внимание на вложенные папки
-		unzip -j main.zip -d /tmp/solstmp # распаковываем все не обращая внимания на вложенные папки (-j)
+		#unzip -j main.zip \*.py -d $PATHTEMP # распаковываем только .py файлы и не обращаем внимание на вложенные папки
+		unzip -j main.zip -d $PATHTEMP # распаковываем все не обращая внимания на вложенные папки (-j)
 		echo -e "\033[41m\033[30m [+] РАСПАКОВКА АРХИВА ЗАВЕРШЕНА \033[0m"
 		cd /usr/bin
-		mkdir solsdev
+		mkdir $SETDIR
 		echo -e "\033[41m\033[30m [+] СОЗДАНА РАБОЧАЯ ДИРЕКТОРИЯ ПРОГРАММЫ \033[0m"
-		chmod -R 777 /usr/bin/solsdev
+		chmod -R 777 $PATHINST
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
-		cp -f /tmp/solstmp/*.py /usr/bin/solsdev # копируем все файла с расширением .py
-		cp -f /tmp/solstmp/app.desktop /usr/bin/solsdev
-		cp -f /tmp/solstmp/solsicons.ico /usr/share/icons/solsicons.ico
-		cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
+		cp -f $PATHTEMP/*.py $PATHINST # копируем все файла с расширением .py
+		cp -f $PATHTEMP/app.desktop $PATHINST
+		cp -f $PATHTEMP/solsicons.ico /usr/share/icons/solsicons.ico
+		cp -f $PATHTEMP/startup.sh $PATHINST
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
-		cd /usr/bin/solsdev
+		cd $PATHINST
 		# --------------------------------------------
 		# Здесь прописываем все нужные библиотеки
         #pip3 install colorama
@@ -52,7 +56,7 @@ else
 		#echo -e "\033[41m\033[30m [+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ \033[0m"
 		# --------------------------------------------
 		echo -e "\033[41m\033[30m [*] НАЧАЛО УДАЛЕНИЯ ВРЕМЕННЫХ ФАЙЛОВ \033[0m"
-		rm -Rv /tmp/solstmp/
+		rm -Rv $PATHTEMP
 		echo -e "\033[41m\033[30m [+] УДАЛЕНИЕ ВРЕМЕННЫХ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		# --------------------------------------------
 		echo -e "\033[42m\033[30m [+] УСТАНОВКА ПРОГРАММЫ ЗАВЕРШЕНА \033[0m"
@@ -66,7 +70,7 @@ else
 			echo -e "\033[42m\033[30m Введите имя пользователя на рабочем столе которого создасться ярлык \033[0m"
 			echo -n "         Пользователь: "
 			read DESKPAR
-			ln -s /usr/bin/solsdev/app.desktop /home/$DESKPAR/Рабочий\ стол/
+			ln -s $PATHINST/app.desktop /home/$DESKPAR/Рабочий\ стол/
 			echo -e "\033[41m\033[30m [+] ЯРЛЫК СОЗДАН НА РАБОЧЕМ СТОЛЕ \033[0m"
 		else
 			echo -e "\033[41m\033[30m [!] ЯРЛЫК НЕ СОЗДАН \033[0m"
@@ -79,7 +83,7 @@ else
 
 		if [[ $DELPAR = да ]]
 		then
-			rm -Rv /usr/bin/solsdev/
+			rm -Rv $PATHINST
 			rm -v /usr/share/icons/solsicons.ico
 			echo -e "\033[41m\033[30m [+] ПРОГРАММА ПОЛНОСТЬЮ УДАЛЕНА \033[0m"
 		else
