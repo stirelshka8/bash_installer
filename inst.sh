@@ -27,7 +27,7 @@ else
 		cd /tmp/solstmp
 		echo -e "\033[41m\033[30m [*] НАЧАЛО СКАЧИВАНИЯ ПРОГРАММЫ С GITHUB \033[0m"
 		#*********
-		wget -q 'https://github.com/stirelshka8/First_programm/archive/refs/heads/main.zip'
+		wget -q 'https://repo.solsdev.site/mian/main.zip'
 		#*********
 		echo -e "\033[41m\033[30m [+] СКАЧИВАНИЕ ЗАВЕРШЕНО \033[0m"
 		echo -e "\033[41m\033[30m [*] НАЧАЛО РАСПАКОВКИ АРХИВА \033[0m"
@@ -40,9 +40,9 @@ else
 		chmod -R 777 /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [*] НАЧАЛО КОПИРОВАНИЯ ФАЙЛОВ В РАБОЧУЮ ДИРЕКТОРИЮ \033[0m"
 		cp -f /tmp/solstmp/*.py /usr/bin/solsdev # копируем все файла с расширением .py
-		#cp -f /tmp/solstmp/app.desktop /usr/bin/solsdev
-		#cp -f /tmp/solstmp/solsicons.ico /usr/share/icons/solsicons.ico
-		#cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
+		cp -f /tmp/solstmp/app.desktop /usr/bin/solsdev
+		cp -f /tmp/solstmp/solsicons.ico /usr/share/icons/solsicons.ico
+		cp -f /tmp/solstmp/startup.sh /usr/bin/solsdev
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		cd /usr/bin/solsdev
 		# --------------------------------------------
@@ -52,7 +52,7 @@ else
 		#echo -e "\033[41m\033[30m [+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ \033[0m"
 		# --------------------------------------------
 		echo -e "\033[41m\033[30m [*] НАЧАЛО УДАЛЕНИЯ ВРЕМЕННЫХ ФАЙЛОВ \033[0m"
-		#rm -Rv /tmp/solstmp/
+		rm -Rv /tmp/solstmp/
 		echo -e "\033[41m\033[30m [+] УДАЛЕНИЕ ВРЕМЕННЫХ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		# --------------------------------------------
 		echo -e "\033[42m\033[30m [+] УСТАНОВКА ПРОГРАММЫ ЗАВЕРШЕНА \033[0m"
@@ -63,9 +63,11 @@ else
 
 		if [[ $STARTPAR = да ]]
 		then
+			echo -e "\033[42m\033[30m Введите имя пользователя на рабочем столе которого создасться ярлык \033[0m"
+			echo -n "         Пользователь: "
+			read DESKPAR
+			ln -s /usr/bin/solsdev/app.desktop /home/$DESKPAR/Рабочий\ стол/
 			echo -e "\033[41m\033[30m [+] ЯРЛЫК СОЗДАН НА РАБОЧЕМ СТОЛЕ \033[0m"
-			# TODO: написать код что бы иконка создавалась автоматически на текущем пользователе
-			ln -s /usr/bin/solsdev/app.desktop /home/stirelshka/Рабочий\ стол/
 		else
 			echo -e "\033[41m\033[30m [!] ЯРЛЫК НЕ СОЗДАН \033[0m"
 		fi
