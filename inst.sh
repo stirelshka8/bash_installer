@@ -80,7 +80,7 @@ else
 		if [[ $DELPAR = да ]]
 		then
 			rm -Rv /usr/bin/solsdev/
-			rm -f /usr/share/icons/solsicons.ico
+			rm -v /usr/share/icons/solsicons.ico
 			echo -e "\033[41m\033[30m [+] ПРОГРАММА ПОЛНОСТЬЮ УДАЛЕНА \033[0m"
 		else
 			echo -e "\033[41m\033[30m [!] РАБОТА ПРОГРАММЫ ЗАВЕРШЕНА \033[0m"
