@@ -31,7 +31,7 @@ DOWNLINK=https://repo.solsdev.site/mian/$NAMEZIP.zip # Переменная сс
 # read DESKPATH
 # ---------
 # TODO: Исправить ошибку пути
-PATHDESKTOP=/home/stirelshka/Рабочий\ стол/
+PATHDESKTOP=home/stirelshka/Рабочий\	стол/
 
 # ******************************************************************************
 
@@ -116,7 +116,7 @@ else
 
 		if [[ $STARTPAR = да ]]
 		then
-			if ! ln -s $PATHINST/$NAMEAPP.desktop $PATHDESKTOP; 
+			if ! cp -l $PATHINST/$NAMEAPP.desktop /$PATHDESKTOP; 
 			then
     		echo "ОШИБКА СОЗДАНИЯ ЯРЛЫКА"
 			exit
