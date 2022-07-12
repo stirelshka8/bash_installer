@@ -31,7 +31,7 @@ DOWNLINK=https://repo.solsdev.site/mian/$NAMEZIP.zip # Переменная сс
 # read DESKPATH
 # ---------
 # TODO: Исправить ошибку пути
-PATHDESKTOP=home/stirelshka/Рабочий\	стол/
+PATHDESKTOP=home/stirelshka/Рабочий\-nстол/
 
 # ******************************************************************************
 
@@ -48,6 +48,8 @@ else
 		if ! mkdir $SETTMP; 
 		then
     	echo "ОШИБКА СОЗДАНИЯ ВРЕМЕННОЙ ПАПКИ"
+		echo "ЕСЛИ ВРЕМЕННАЯ ПАПКА БЫЛА СОЗДАНА РАНЕЕ, ТО ОНА УДАЛИТСЯ!"
+		rm -Rv $PATHTEMP
 		exit
 		else
 		echo -e "\033[41m\033[30m [+] СОЗДАНА ВРЕМЕННАЯ ДИРЕКТОРИЯ ПРОГРАММЫ \033[0m"
@@ -57,7 +59,8 @@ else
 		cd $PATHTEMP
 
 		echo -e "\033[41m\033[30m [*] НАЧАЛО ЗАГРУЗКИ ФАЙЛА ПРОГРАММЫ \033[0m"
-		if ! wget -q $DOWNLINK ;
+		# TODO: Проблемма скачивания в repo.solsdev.site, почему то не идет загрузка.
+		if ! wget -q $DOWNLINK;
 		then
     	echo "ОШИБКА ЗАГРУЗКИ ФАЙЛА"
 		exit
