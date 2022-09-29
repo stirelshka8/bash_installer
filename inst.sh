@@ -61,7 +61,6 @@ else
 		cd $PATHTEMP
 
 		echo -e "\033[41m\033[30m [*] НАЧАЛО ЗАГРУЗКИ ФАЙЛА ПРОГРАММЫ \033[0m"
-		# TODO: Проблемма скачивания в repo.solsdev.site, почему то не идет загрузка.
 		if ! wget -q $DOWNLINK;
 		then
     	echo "ОШИБКА ЗАГРУЗКИ ФАЙЛА"
