@@ -43,6 +43,7 @@ then
 else
 	if ! [ -d $PATHINST ]
 	then
+		# shellcheck disable=SC2164
 		cd /tmp
 
 		if ! mkdir $SETTMP; 
@@ -56,6 +57,7 @@ else
 		fi
 
 		chmod -R 777 $PATHTEMP
+		# shellcheck disable=SC2164
 		cd $PATHTEMP
 
 		echo -e "\033[41m\033[30m [*] НАЧАЛО ЗАГРУЗКИ ФАЙЛА ПРОГРАММЫ \033[0m"
@@ -78,6 +80,7 @@ else
 		echo -e "\033[41m\033[30m [+] РАСПАКОВКА ФАЙЛА ЗАВЕРШЕНА УСПЕШНО \033[0m"
 		fi		
 
+		# shellcheck disable=SC2164
 		cd /usr/bin
 
 		if ! mkdir $SETDIR; 
@@ -94,13 +97,14 @@ else
 		cp -f $PATHTEMP/$NAMEAPP.desktop $PATHINST
 		cp -f $PATHTEMP/$NAMEICO.ico $PATHICO/$NAMEICO.ico
 		cp -f $PATHTEMP/$NAMESCR.sh $PATHINST
+		cp -f $PATHTEMP/requirements.txt $PATHINST
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
+		# shellcheck disable=SC2164
 		cd $PATHINST
 		# --------------------------------------------
-		# Здесь прописываем все нужные библиотеки
-        #pip3 install colorama
-        #pip3 install art
-		#echo -e "\033[41m\033[30m [+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ \033[0m"
+		echo -e "\033[41m\033[30m [*] УСТАНОВКИ БИБЛИОТЕК PYTHON \033[0m"
+		python3 -m pip install -r $PATHINST/requirements.txt
+		echo -e "\033[41m\033[30m [+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ \033[0m"
 		# --------------------------------------------
 		echo -e "\033[41m\033[30m [*] НАЧАЛО УДАЛЕНИЯ ВРЕМЕННЫХ ФАЙЛОВ \033[0m"
 		if ! rm -Rv $PATHTEMP; 
