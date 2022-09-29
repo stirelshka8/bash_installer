@@ -23,8 +23,9 @@ PATHICO=/usr/share/icons # Переменная дериктории где ле
 NAMEAPP=app # Переменная названия ярлыка запуска
 NAMEICO=solsicons # Переменная названия иконки программы
 NAMESCR=startup # Переменная названия скрипта запуска программы
-NAMEZIP=main # Переменная названия скачиваемого архива
+NAMEZIP=main # Переменная названия скачиваемого архива (при скачивании с GitHub по умолчанию main)
 DOWNLINK=https://repo.solsdev.site/mian/$NAMEZIP.zip # Переменная ссылки на скачивание программы
+REQFILE=requirements.txt # Файл с зависимостями (для получения можно воспользоваться командой pip freeze > [имя файла])
 
 # ---------
 # echo -n "Введите полный путь до рабочего стола - "
@@ -96,14 +97,19 @@ else
 		cp -f $PATHTEMP/$NAMEAPP.desktop $PATHINST
 		cp -f $PATHTEMP/$NAMEICO.ico $PATHICO/$NAMEICO.ico
 		cp -f $PATHTEMP/$NAMESCR.sh $PATHINST
-		cp -f $PATHTEMP/requirements.txt $PATHINST
+		cp -f $PATHTEMP/$REQFILE $PATHINST
 		echo -e "\033[41m\033[30m [+] КОПИРОВАНИЕ ФАЙЛОВ ЗАВЕРШЕНО \033[0m"
 		# shellcheck disable=SC2164
 		cd $PATHINST
 		# --------------------------------------------
 		echo -e "\033[41m\033[30m [*] УСТАНОВКИ БИБЛИОТЕК PYTHON \033[0m"
-		python3 -m pip install -r $PATHINST/requirements.txt
+		if ! python3 -m pip install -r $PATHINST/$REQFILE
+		then
+    	echo "ОШИБКА УСТАНОВКИ БИБЛИОТЕК"
+		exit
+		else
 		echo -e "\033[41m\033[30m [+] БИБЛИОТЕКИ УСТАНОВЛЕННЫ \033[0m"
+		fi
 		# --------------------------------------------
 		echo -e "\033[41m\033[30m [*] НАЧАЛО УДАЛЕНИЯ ВРЕМЕННЫХ ФАЙЛОВ \033[0m"
 		if ! rm -Rv $PATHTEMP; 
